@@ -1,8 +1,8 @@
 Source: debootstrap
 Section: admin
 Priority: extra
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>, Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Anthony Towns <ajt@debian.org>, Joey Hess <joeyh@debian.org>, Junichi Uekawa <dancer@debian.org>, Colin Watson <cjwatson@debian.org>
 Build-Depends: debhelper (>= 7.0.50), makedev (>= 2.3.1-69) [linux-any]
 Standards-Version: 3.9.2

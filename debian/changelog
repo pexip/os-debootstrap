@@ -1,3 +1,11 @@
+debootstrap (1.0.39ubuntu0.3pexip1) precise; urgency=low
+
+  * Package for Pexip
+  * Backport Debian change to fix unmounting of host filesystems:
+    http://anonscm.debian.org/gitweb/?p=d-i/debootstrap.git;a=commit;h=a1d5ddea5b7db00548173cee8236aaad61cf5961
+
+ -- John-Mark Bell <jmb@pexip.com>  Mon, 09 Sep 2013 17:36:18 +0100
+
 debootstrap (1.0.39ubuntu0.3) precise; urgency=low
 
   * Add (Ubuntu) saucy as a symlink to gutsy. (LP: #1172920)
