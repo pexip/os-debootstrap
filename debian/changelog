@@ -1,3 +1,1319 @@
+debootstrap (1.0.137) unstable; urgency=medium
+
+  [ kasperk81 ]
+  * reinstate Ubuntu codename symlinks
+
+  [ Luca Boccassi ]
+  * Ubuntu: add symlink for oracular
+
+ -- Luca Boccassi <bluca@debian.org>  Thu, 25 Jul 2024 23:15:47 +0100
+
+debootstrap (1.0.136) unstable; urgency=medium
+
+  [ Philip Hands ]
+  * reinstate Debian codename symlinks (closes: #1073785)
+  * drop unneeded addition of "test extras"
+  * switch to using branch2repo for salsa-ci
+  * avoid setting DEF_MIRROR to https://https://...
+
+ -- Luca Boccassi <bluca@debian.org>  Tue, 18 Jun 2024 21:36:25 +0100
+
+debootstrap (1.0.135) unstable; urgency=medium
+
+  [ Ken Sharp ]
+  * fix quoting to allow spaces in target directory (Closes: #1061820)
+  * Use distro-info where possible
+  * Remove superfluous symlinks
+  * Use correct keyring and mirror for Ubuntu
+  * Ubuntu: test for dpkg zstd support for Hirsute+
+  * Update dependencies
+  * Remove hardcoded HTTPS mirror and use inline substitution
+
+  [ Adrien Robert ]
+  * fix: handling of DIRECT returned by Acquire::http:Proxy-Auto-Detect
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * debian/tests/debian-testing: test minbase, default and buildd variants
+
+  [ Helmut Grohne ]
+  * make debootstrap work on filesystems mounted nodev (Closes: #1073169)
+
+ -- Luca Boccassi <bluca@debian.org>  Sat, 15 Jun 2024 11:13:44 +0100
+
+debootstrap (1.0.134) unstable; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * scripts/debian-common: install Priority:required with buildd variant
+    for bookworm and earlier
+  * scripts/debian-common: fixup for last commit
+  * error out if chroot cannot be found in $PATH
+  * check_sane_mount: if mknod does not work, test if bind-mounting
+    /dev/null works
+  * setup_devices: fall back to setup_devices_bind if setup_devices_simple
+    failed irrespective of the container
+  * debian/tests/debian-testing: support for DEBOOTSTRAP_SCRIPT
+    environment variable
+  * Move "unshared" test from autopkgtest to salsaci pipeline
+  * debian/salsa-ci.yml: add checks for the buildd variant
+
+  [ Matthias Klumpp ]
+  * Implement support for repos with modern-style arch:all support
+  * Add test for split-arch:all support
+
+  [ Luca Boccassi ]
+  * Add Ubuntu scripts/ symlinks for Lunar, Mantic and Noble
+  * Add Debian scripts/ symlink for Forky
+  * Bump copyright year ranges in d/copyright
+
+ -- Luca Boccassi <bluca@debian.org>  Fri, 05 Jan 2024 10:17:39 +0100
+
+debootstrap (1.0.133) unstable; urgency=medium
+
+  [ Luca Boccassi ]
+  * Mark debootstrap as MA: foreign
+  * Drop obsolete d/rules overrides and stop changing user/group in
+    Makefile
+  * d/copyright: switch format to DEP5
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * functions: use mount from the outside to support chroots without mount
+    installed
+  * Let the buildd variant only install essential, build-essential and apt
+    (Closes: #837060)
+
+ -- Luca Boccassi <bluca@debian.org>  Sat, 21 Oct 2023 12:38:26 +0100
+
+debootstrap (1.0.132) unstable; urgency=medium
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * debian/tests/control: run debootstrap with unshared namespaces
+
+  [ Simon McVittie ]
+  * d/tests/debian-testing:
+    - More accurately emulate the behaviour of pbuilder 0.231
+    - Revert fake/schroot-1.6.10-3 to an accurate emulation of the
+      behaviour of schroot 1.6.10-3 (Closes: #983311)
+    - Document schroot 1.6.10-3 with the default profile as expected to
+      fail to use /dev/pts in a lxc >= 3 or Docker container; this is a
+      schroot bug (#983423) and not a debootstrap bug
+    - Resync fake/schroot-proposed with the patch proposed on #983423
+    - Improve debug logging
+    - Expand doc-comments
+    - With these changes, the autopkgtest is confirmed to pass in
+      autopkgtest-virt-qemu (Closes: #983197)
+    - Skip systemd-nspawn phase when $container is set
+
+ -- Luca Boccassi <bluca@debian.org>  Mon, 28 Aug 2023 14:16:37 +0100
+
+debootstrap (1.0.131) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Simon McVittie ]
+  * functions: Reinstate setup_merged_usr() as it existed prior to !96
+
+ -- Helmut Grohne <helmut@subdivi.de>  Sun, 20 Aug 2023 14:11:43 +0200
+
+debootstrap (1.0.130) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Samuel Thibault ]
+  * hurd: Fix debootstrap --second-stage on native runs.
+
+  [ Fatih Altun ]
+  * Add Pardus support
+
+  [ Denis 'GNUtoo' Carikli ]
+  * Add Trisquel to scripts dir
+
+  [ Helmut Grohne ]
+  * implement merged-/usr by post-merging. Closes: #1049898
+
+  [ Luca Boccassi ]
+  * Add myself to Uploaders
+
+  [ Michael Chen ]
+  * README: add --preserve-env option to sudo command
+
+ -- Luca Boccassi <bluca@debian.org>  Fri, 18 Aug 2023 16:02:59 +0100
+
+debootstrap (1.0.128+nmu5) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Undo hostile unwarranted change.
+
+ -- Luca Boccassi <bluca@debian.org>  Sun, 16 Jul 2023 12:42:47 +0100
+
+debootstrap (1.0.128+nmu3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Akbarkhon Variskhanov ]
+  * functions: Quote $USE_COMPONENTS. Thanks to Robert de Bath for
+    reporting the bug and providing the fix (Closes: #963804)
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * functions: improve misleading error message when tar fails
+  * check if http_proxy is unset instead of checking if it's empty
+    (Closes: #1031105)
+  * If mount -t proc proc /proc failed, fall back to bind-mounting /proc
+
+  [ Simon McVittie ]
+  * Mention --merged-usr in --help output (Closes: #1031828)
+  * functions: Default to merged-/usr, even for newer suites' buildds
+  * d/source/lintian-overrides: Update overrides syntax
+
+  [ Luca Boccassi ]
+  * Bump Standards-Version to 4.6.2, no changes
+
+ -- Luca Boccassi <bluca@debian.org>  Sat, 15 Jul 2023 12:56:11 +0100
+
+debootstrap (1.0.128+nmu2) unstable; urgency=low
+
+  * Non-maintainer upload.
+
+  [ Matthias Klumpp ]
+  * Update PureOS bootstrap script
+
+  [ Luca Boccassi ]
+  * autopkgtest: fix running on !amd64
+  * autopkgtest: run on 'testing' instead of 'bookworm'
+
+ -- Luca Boccassi <bluca@debian.org>  Tue, 18 Oct 2022 23:49:31 +0100
+
+debootstrap (1.0.128+nmu1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * autopkgtest: add /usr/sbin to PATH
+
+ -- Luca Boccassi <bluca@debian.org>  Mon, 17 Oct 2022 10:45:01 +0100
+
+debootstrap (1.0.128) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * Make gbp tag produce the right tag format
+
+  [ Carsten Schoenert ]
+  * Add (PureOS) byzantium as a symlink to amber
+  * Add (PureOS) crimson as a symlink to amber
+
+  [ Daniel Watkins ]
+  * Support Packages files which are not ordered alphabetically by Package field
+    (LP: #1990856)
+
+  [ Dimitri John Ledkov ]
+  * d/tests/unsorted-packages-files: cleanup temp files and daemon
+
+  [ Tianon Gravi ]
+  * Apply "EXCLUDE_DEPENDENCY" during "resolve_deps"
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Fri, 14 Oct 2022 12:31:04 +0100
+
+debootstrap (1.0.127+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Ansgar ]
+  * debootstrap: optionally exclude specific dependencies
+  * debian-common: exclude usrmerge when installing usr-is-merged
+
+  [ Samuel Thibault ]
+  * Enable usrmerge on hurd-i386 too.
+
+ -- Luca Boccassi <bluca@debian.org>  Sat, 24 Sep 2022 14:07:46 +0100
+
+debootstrap (1.0.127) unstable; urgency=medium
+
+  [ Heysion Yuan ]
+  * add usrmerge support loongarch64.
+
+  [ Paul Menzel ]
+  * Avoid duplicate components in `sources.list`.
+
+  [ Edward Tomasz Napierala ]
+  * Mount /dev/fd if the host is FreeBSD.
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 12 to 13.
+  * Update renamed lintian tag names in lintian overrides.
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) kinetic as a symlink to gutsy.
+  * Update standards version to 4.6.0.1, no changes needed.
+
+  [ Luca Boccassi ]
+  * setup_merged_usr: create skip flag when merged-usr is disabled on bookworm+
+  * Add usr-is-merged to the required set on testing/unstable
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Mon, 25 Jul 2022 13:25:39 +0100
+
+debootstrap (1.0.126+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Undo the changes of the last upload. (Closes: #998867)
+
+ -- Johannes Schauer Marin Rodrigues <josch@debian.org>  Sun, 28 Nov 2021 12:38:15 +0100
+
+debootstrap (1.0.126) unstable; urgency=low
+
+  * Ensure bookworm+ suites are set up with merged-usr. (Closes: #978636)
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Mon, 08 Nov 2021 14:40:06 +0000
+
+debootstrap (1.0.125) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * functions (download_main): Let the loops try the different components and
+    suites when the checksum doesn't match. This is needed when several of
+    them contain the same package name.
+
+  [ Arnaud Rebillout ]
+  * Fix auto proxy discovery (Closes: #985811)
+  * Fix detection of docker container for cgroup v2 (Closes: #985481)
+
+  [ Johannes 'josch' Schauer ]
+  * functions: define link_dir before using it.
+
+  [ Hideki Yamane ]
+  * Add (Debian) trixie as a symlink to sid.
+
+  [ Dimitri John Ledkov ]
+  * Add (Ubuntu) jammy as a symlink to gutsy.
+  * Upload to unstable.
+
+ -- Dimitri John Ledkov <dimitri.ledkov@canonical.com>  Tue, 02 Nov 2021 11:35:00 +0000
+
+debootstrap (1.0.124) experimental; urgency=medium
+
+  [ Colin Watson ]
+  * Add (Ubuntu) groovy as a symlink to gutsy.
+
+  [ Samuel Thibault ]
+  * functions: Turn for loops variables into locals, suggested by jhcha54008.
+
+  [ YunQiang Su ]
+  * stage1: re-mkdir /proc if it is a symlink instead of umount. (Closes: #968927)
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) hirsute as a symlink to gutsy.
+
+  [ Tobias Koch ]
+  * Add --inrelease-path option to allow specifying by-hash InRelease
+    location.
+
+  [ Dimitri John Ledkov ]
+  * functions: add zstd control&data support to the ar extractor LP: #1923845
+  * Add (Ubuntu) impish as a symlink to gutsy.
+  * gutsy: sync changes from Ubuntu, to ensure that impish+ are always
+    merged-usr.
+  * gutsy: use --extractor=ar if dpkg-deb has no zstd support (i.e. on
+    Debian & non-Ubuntu derivatives).
+  * rules,control: adjust Recommends/Suggests to be appropriate on each
+    distro.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 26 Apr 2021 15:02:44 +0100
+
+debootstrap (1.0.123) unstable; urgency=medium
+
+  * Reinstate safeguard removed in 1.0.121, which is absolutely needed
+    to avoid unmounting target entirely, as seen when running in d-i
+    with default parameters (Closes: #953849). Vielen Dank, Johannes!
+
+ -- Cyril Brulebois <kibi@debian.org>  Sat, 14 Mar 2020 02:07:20 +0100
+
+debootstrap (1.0.122) unstable; urgency=medium
+
+  * Revert the addition of (mandatory) security support as debootstrap's
+    goal is to provide with a basic Debian system that many provisioning
+    systems are built upon. Changing behaviour now seems to be doing a
+    disservice to all those tools that would need adapting. In addition to
+    not seeming to be a good idea, that triggers regressions for a number
+    of use cases (Closes: #953759, #953588, #953593, #953594, #953617).
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 13 Mar 2020 05:43:24 +0100
+
+debootstrap (1.0.121) unstable; urgency=medium
+
+  * Fix "debootstrapping testing and stable results in exit 100",
+    use CODENAME for check properly (Closes: #953404)
+
+ -- Hideki Yamane <henrich@debian.org>  Tue, 10 Mar 2020 21:42:03 +0900
+
+debootstrap (1.0.120) unstable; urgency=medium
+
+  * Check codename for apt-transport-https (Closes: #920255, #879755)
+  * Add security mirror setting (Closes: #939852, #543819)
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 08 Mar 2020 02:01:59 +0900
+
+debootstrap (1.0.119) unstable; urgency=medium
+
+  [ Hideki Yamane ]
+  * Fix: specify --foreign and --unpack-tarball at the same time
+    Thanks to Cel Skeggs <cela@mit.edu> for the patch (Closes: #946783)
+  * Add check rule for systemd-nspawn
+
+  [ Jeremiah C. Foster ]
+  * Adding PureOS 'amber' to scripts dir (Closes: #946476)
+
+ -- Hideki Yamane <henrich@debian.org>  Thu, 27 Feb 2020 21:16:24 +0900
+
+debootstrap (1.0.118) unstable; urgency=medium
+
+  * rename .gitlab-ci.yml to salsa-ci.yml
+  * debian/control
+    - use debhelper-compat (= 12) and drop debian/compat
+    - set Standards-Version 4.5.0
+  * debian/tests/debian-testing
+    - use AUTOPKGTEST_TMP instead of obsolete ADTTMP
+  * fix /dev/ptmx mount on chroot and re-enable autopkgtest
+  * fix: don't pass an empty arg to wget when --verbose is applied
+    (Closes: #951367)
+
+ -- Hideki Yamane <henrich@debian.org>  Fri, 21 Feb 2020 21:16:39 +0900
+
+debootstrap (1.0.117) unstable; urgency=medium
+
+  [ Simon Quigley ]
+  * Add (Ubuntu) focal as a symlink to gutsy. (Closes: #944976, #946815)
+
+  [ Holger Wansing ]
+  * Remove trailing whitespaces from changelog file, to fix lintian tag.
+
+  [ James Clarke ]
+  * Add a new --extra-suites option to support debootstrapping Debian Ports
+    architectures with essential/required packages in its unreleased suite.
+
+  [ Hideki Yamane ]
+  * Fix "Fails when run from path containing space character" (Closes: #947173)
+  * Remove some quote for variables since somehow wget fails with ""
+    (double quote with no value)
+
+ -- Hideki Yamane <henrich@debian.org>  Tue, 11 Feb 2020 21:15:26 +0900
+
+debootstrap (1.0.116) unstable; urgency=medium
+
+  [ Hideki Yamane ]
+  * use salsa-pipeline for CI, instead of custom rule
+  * disable unnecessary blhc and test-build-any CI test
+
+  [ Philip Hands ]
+  * disable the failing autopkgtest job
+  * provide support for Devuan release names
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 29 Sep 2019 10:56:48 +0900
+
+debootstrap (1.0.115) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Remove Christian Perrier from Uploaders, with many thanks for all
+    his contributions over the years! (Closes: #927549)
+
+  [ Hideki Yamane ]
+  * debian/control
+    - Remove Junichi Uekawa <dancer@debian.org> from Uploaders with ack
+  * scripts
+    - Add (Ubuntu) eoan as a symlink to gutsy.
+
+ -- Hideki Yamane <henrich@debian.org>  Sat, 06 Jul 2019 20:22:30 +0900
+
+debootstrap (1.0.114) unstable; urgency=medium
+
+  * Revert changes from 1.0.113 (closes: #918722)
+
+ -- Julien Cristau <jcristau@debian.org>  Wed, 09 Jan 2019 14:00:04 +0100
+
+debootstrap (1.0.113) unstable; urgency=low
+
+  * Fail if its repository is expired (in InRelease file) since creating
+    base image from such repository is insecure. If you want to use such
+    repo with notice, please use "--no-check-valid-until" option
+
+  * debian/control
+    - set Standards-Version: 4.3.0
+
+ -- Hideki Yamane <henrich@debian.org>  Sat, 05 Jan 2019 20:13:44 +0900
+
+debootstrap (1.0.112) unstable; urgency=low
+
+  [ Thomas Lange ]
+  * optimize code, make debootstrap faster (Closes: #871835)
+    - use hash instead of grep for each line we read
+    - we can use elsif, because the line can't match both patterns
+    - There's no need to print the dependencies for each package separately,
+      if when later do sort|uniq, so just collect all dependencies in a hash
+      and print them at the end
+    - do not read all lines of the Packages file into the perl scripts,
+      egrep is used for filtering only the lines we need to read, since egrep
+      is faster than perl, this save a lot of time
+    - speed up by using grep -P and setting LC_ALL=C
+    - automatic detect if grep support perl regex
+    - in this part, we only need the package name and priority this makes
+      another little speedup, since the perl part need less lines to parse
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 23 Dec 2018 18:24:00 +0900
+
+debootstrap (1.0.111) unstable; urgency=medium
+
+  * Team upload
+
+  [ Simon McVittie ]
+  * Disable merged /usr by default when making a buildd chroot (closes: #914208)
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 30 Nov 2018 21:01:08 +0100
+
+debootstrap (1.0.110) unstable; urgency=medium
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) disco as a symlink to gutsy.
+
+  [ Hideki Yamane ]
+  * Add debian/source/lintian-overrides to ignore lintian warnings
+    since it is really necessary for debootstrap
+
+ -- Hideki Yamane <henrich@debian.org>  Thu, 08 Nov 2018 07:16:42 +0900
+
+debootstrap (1.0.109) unstable; urgency=medium
+
+  [ Raphaël Hertzog ]
+  * Keep all script files in the udeb so that derivatives can use the
+    udeb built by Debian. Related to #893713.
+
+  [ Hideki Yamane ]
+  * Just set Standards-Version: 4.2.1 without change
+
+ -- Hideki Yamane <henrich@debian.org>  Mon, 10 Sep 2018 02:42:58 +0900
+
+debootstrap (1.0.108) unstable; urgency=medium
+
+  * Fix "Do not download packages with --unpack-tarball option"
+    (Closes: #551838)
+    - Also make some options exclusive each
+  * Let debootstrap shows error if there's a file already before extraction,
+    not die silently (Closes: #728344)
+  * Add Trusty and Xenial for merged-usr blacklist (Closes: #905864, #905873)
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 12 Aug 2018 17:58:37 +0900
+
+debootstrap (1.0.107) unstable; urgency=medium
+
+  [ Patrick McDermott ]
+  * Fix wgetprogress() with --debian-installer (Closes: #829725)
+
+  [ Dan Nicholson ]
+  * Strip URL scheme from apt lists (Closes: #903481)
+
+  [ Hideki Yamane ]
+  * Fix docker detection breaks QEMU's binfmt_misc bootstraping
+    (Closes: #903657)
+    - Avoid removing host's /proc on some environment
+    - Add workaround for second-stage inside docker
+  * Align scripts/gutsy to scripts/debian-common
+  * Remove unnecessary script files from udeb package
+    (Closes: #618839, #893713)
+
+ -- Hideki Yamane <henrich@debian.org>  Thu, 26 Jul 2018 19:12:20 +0900
+
+debootstrap (1.0.106) unstable; urgency=medium
+
+  * Improve related to container (Closes: #902924)
+  * Add docker support (Closes: #890867)
+  * Add wget check for non-package environment
+  * debian/control
+    - set Standards-Version: 4.1.5 with no change
+
+ -- Hideki Yamane <henrich@debian.org>  Thu, 05 Jul 2018 17:48:22 +0900
+
+debootstrap (1.0.105) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Improve wording for --log-extra-deps in the manpage, thanks to
+    intrigeri for the report.
+
+  [ Hideki Yamane ]
+  * Use $container to detect systemd-nspawn and lxc{-libvirt} (Closes: #902350)
+  * cache-dir option: change error detection order
+  * Rervert "Add 2nd exclude package check to really exclude packages even if
+    it breaks dependencies" since it doesn't work as expected and cause
+    regression (Closes: #901977) and (Reopen: #830794, #557322, #783589)
+    To make it proper, just remove "--exclude" packages twice but do not
+    exec dependencies resolution in 2nd time, I guess.
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 01 Jul 2018 23:09:10 +0900
+
+debootstrap (1.0.104) unstable; urgency=medium
+
+  * Fix /etc/machine-id mount issue (Closes: #899155)
+  * Fix regression with file:/// mirror (Closes: #901717)
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 24 Jun 2018 20:41:13 +0900
+
+debootstrap (1.0.103) unstable; urgency=medium
+
+  * Avoid failure with old arch-test package (Closes: #900925)
+    Thanks to jhcha54008 <jhcha54008@free.fr>
+  * Relax merged-usr blacklist restriction (Closes: #901808)
+    Thanks to Tianon Gravi <tianon@debian.org>
+
+ -- Hideki Yamane <henrich@debian.org>  Sat, 23 Jun 2018 11:44:57 +0900
+
+debootstrap (1.0.102) unstable; urgency=medium
+
+  * Enable merged-/usr by default (Closes: #839046)
+    This is applied for buster and later.
+  * Fix "debootstrap doesn't carry --components across --foreign/--second-stage"
+    (Closes: #877855)
+  * Fix debian-common path with tarball and --second-stage (Closes: #897379)
+
+ -- Hideki Yamane <henrich@debian.org>  Wed, 13 Jun 2018 22:00:11 +0900
+
+debootstrap (1.0.101) unstable; urgency=medium
+
+  [ Hideki Yamane ]
+  * debian/tests
+    - Don't use unshare on some environment
+    - Fix chroot dir location
+    - Just ignore tests under docker environment
+  * scripts
+    - Add "bookworm" (Debian12) to script
+  * README
+    - Update git info to point to salsa repo
+
+  * Fix wrong assumptions for $HOST_OS
+  * Move container=lxc-libvirt check to work properly
+  * Avoid mknod $TARGET/dev/console failure with systemd-nspawn
+  * Fix exclude to work with --no-resolve-deps option
+  * Add "--log-extra-deps" option to reduce time
+  * Add 2nd exclude package check to really exclude packages even if
+    it breaks dependencies (Closes: #830794, #557322, #783589)
+
+  [ Philipp Kern ]
+  * Gitlab CI: Disable the broken autopkgtest step.
+
+  [ Tianon Gravi ]
+  * Allow "script" argument to be specified as either an absolute path
+    as before, or as a raw codename such as "sid", assumed to be
+    relative to "/usr/share/debootstrap/scripts" (Closes: #742672)
+
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 03 Jun 2018 19:41:23 +0900
+
+debootstrap (1.0.100) unstable; urgency=medium
+
+  [ Hideki Yamane ]
+  * Specify https mirror to check https mirror specific problem
+    (See #896071)
+  * Quote $DEBOOTSTRAP_DIR properly (Closes: #586158)
+  * Simplify checking debian-common file (Closes: #897379)
+
+  [ Philipp Kern ]
+  * Add an initial Gitlab CI config file.
+
+ -- Hideki Yamane <henrich@debian.org>  Tue, 22 May 2018 20:15:26 +0900
+
+debootstrap (1.0.99) unstable; urgency=medium
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) cosmic as a symlink to gutsy.
+  * Bump Standards-Version to 4.1.4.
+
+  [ Hideki Yamane ]
+  * Fix download failure when specifying multiple components (Closes: #898738)
+    - Also add multiple components to test case
+
+ -- Hideki Yamane <henrich@debian.org>  Thu, 17 May 2018 10:57:52 +0900
+
+debootstrap (1.0.98) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Update Vcs-{Browser,Git} to point to salsa (alioth's replacement).
+
+  [ Julien Cristau ]
+  * Add Acquire-By-Hash support. (Closes: #886016)
+
+  [ Hideki Yamane ]
+  * Fix some unnecessary quoting that caused an error. (Closes: #896071)
+  * Handle systemd-nspawn and lxc gracefully in second stage.
+    (Closes: #840372, #731802)
+  * Allow tarballs ending in .tar.gz and .tar.xz to be used to
+    acquire already downloaded debs. (Closes: #895096)
+  * Properly deal with the fakechroot variant when --foreign is passed
+    to debootstrap. Thanks to jhcha54008 for the patch. (Closes: #741964)
+  * Properly print proxy auto-detection message.
+
+ -- Philipp Kern <pkern@debian.org>  Mon, 14 May 2018 11:22:35 +0200
+
+debootstrap (1.0.97) unstable; urgency=medium
+
+  [ Dan Nicholson ]
+  * Handle existing /dev (Closes: #872577)
+
+  [ Hideki Yamane ]
+  * Create /dev/console as same as previous (Closes: #872059)
+  * Do not ignore HTTPS mirror setting (Closes: #893954)
+  * Improve manpage "what is calls a Debian base system" (Closes: #872948)
+    Thanks to Emmanuel Kasper <manu@debian.org> for the patch
+  * Improve error message when download fails (Closes: #866401)
+    Thanks to Raphaël Hertzog <hertzog@debian.org> for the patch
+  * Use wget --non-verbose option instead of --quiet
+  * Improve error message on Release signed by unknown key (Closes: #698677)
+  * Add --cache-dir feature (Closes: #844118)
+    It is enabled by default and use /var/cache/apt/archives as default value
+
+  [ Adam Borowski ]
+  * Use arch-test if installed to check whether second stage is possible.
+    (Closes: #826709)
+
+  [ Lubomir Rintel ]
+  * Fix boostrapping libvirt LXC containers (Closes: #890419)
+
+  [ Raphaël Hertzog ]
+  * Use "command -v apt-config" to check for apt-config's presence
+    (Closes: #895466)
+  * Drop default value for --cache-dir parameter
+  * Forbid the usage of non-empty directories with --print-debs and
+    --make-tarball
+  * Do not use HTTPS for Kali bootstrap script
+
+ -- Hideki Yamane <henrich@debian.org>  Tue, 17 Apr 2018 11:06:32 +0900
+
+debootstrap (1.0.96) unstable; urgency=medium
+
+  * Escape spaces to fix debootstrap on path contains space fails
+    Thanks to Tianon Gravi <tianon@debian.org> for the based patch
+    (Closes: #586158, #762431)
+  * Add warning if file specified via --keyring does not exist
+    Thanks to jnqnfe <jnqnfe@gmail.com> for the patch
+    (Closes: #754318, #775474)
+  * Avoid unnecessary keyring warning with --second-stage option
+    (Closes: #734324)
+  * Output warning if falling back to sha1 (Closes: #775444)
+    Thanks to jnqnfe <jnqnfe@gmail.com> for the patch.
+  * Prevent unintended removal with --print-debs option (Closes: #833525)
+    Thanks to Johannes Schauer <josch@debian.org> for the patch
+  * Add scripts for Kali Linux (Closes: #798564)
+  * Improve manpage description for --{unpack,make}-tarball options
+    (Closes: #563647)
+
+  * debian/control
+    - Add "Suggests: squid-deb-proxy-client"
+  * debian/rules
+    - Add Kali for ${keyring} pattern
+
+  [ Sjoerd Simons ]
+  * Fix multiple components usage for --foreign/--second-stage
+    (Closes: #806780)
+
+  [ Michael Vogt ]
+  * Try to auto-detect proxy if available (e.g. squid-deb-proxy-client)
+    (Closes: #732628)
+
+ -- Hideki Yamane <henrich@debian.org>  Fri, 06 Apr 2018 10:02:20 +0900
+
+debootstrap (1.0.95) unstable; urgency=medium
+
+  * Really fix #894415 (Closes: #894415)
+
+ -- Hideki Yamane <henrich@debian.org>  Sat, 31 Mar 2018 13:28:26 +0900
+
+debootstrap (1.0.94) unstable; urgency=medium
+
+  * debian/control
+    - Add myself to Uploaders
+  * scripts/sid
+    - Regression fix with #798562 change, work on non-package environment.
+      Thanks to Nicolas Boichat <drinkcat@chromium.org> for the report
+      (Closes: #894415)
+
+ -- Hideki Yamane <henrich@debian.org>  Fri, 30 Mar 2018 21:41:52 +0900
+
+debootstrap (1.0.93+nmu3) unstable; urgency=medium
+
+  * Non-maintainer Upload.
+
+  [ Hideki Yamane ]
+  * Avoid pre-exist directory causes failure (Closes: #864734)
+  * Split common code from scripts/sid to scripts/debian-common and share it
+    between distributions (Closes: #798562)
+
+  [ Lubomir Rintel ]
+  * Don't let host PATH leak into the target commands. It works on chroots
+    that have different PATH like Arch Linux and Fedora (Closes: #718632,
+    #770658, #890418)
+
+ -- Hideki Yamane <henrich@debian.org>  Sun, 18 Mar 2018 00:34:09 +0900
+
+debootstrap (1.0.93+nmu2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * fix regression with Ubuntu releases
+
+ -- Hideki Yamane <henrich@debian.org>  Sat, 17 Mar 2018 23:46:30 +0900
+
+debootstrap (1.0.93+nmu1) unstable; urgency=medium
+
+  * Non-maintainer Upload.
+  * Use force_md5 for breezy, dapper and edgy (Closes: #659360, #676373)
+    Now you can create Ubuntu breezy/dapper/edgy chroot.
+  * Add Suggests: ubuntu-archive-keyring for debootstraping Ubuntu on Debian.
+    When you fetch Ubuntu packages ubuntu-archive-keyring is necessary.
+    (Closes: #736995)
+  * Change repository URI for old Ubuntu releases (Closes: #676370, #839073)
+    Archived Ubuntu releases are at old-releases.ubuntu.com/ubuntu
+  * Set correct keyring and default mirror for old debian releases.
+    Now you can fetch potato/woody/sarge/etch/lenny/squeeze if you want.
+    (Closes: #891404, #600647, #792729)
+
+ -- Hideki Yamane <henrich@debian.org>  Mon, 05 Mar 2018 22:28:22 +0900
+
+debootstrap (1.0.93) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * Team upload.
+  * scripts/gutsy: incorporate changes from Ubuntu:
+    + Sync from scripts/sid.
+    + Fix debootstrap --variant=fakechroot failure because initscripts is no
+      longer part of the base system.
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 07 Dec 2017 09:25:07 +0100
+
+debootstrap (1.0.92) unstable; urgency=medium
+
+  * Team upload.
+  * Add (Ubuntu) bionic as a symlink to gutsy.
+  * Bump Standards-Version to 4.1.1:
+    + Priority:extra is deprecated, change to optional.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Fri, 27 Oct 2017 17:05:39 +0200
+
+debootstrap (1.0.91) unstable; urgency=medium
+
+  [ Sven Joachim ]
+  * Avoid the 'type' shell command (closes: #860545).
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 26 Jul 2017 06:53:10 +0200
+
+debootstrap (1.0.90) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * Add (Ubuntu) artful as a symlink to gutsy.
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 24 Apr 2017 06:49:33 +0200
+
+debootstrap (1.0.89) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Instead of creating a /dev/ptmx → pts/ptmx symlink unconditionally,
+    try mknod with “c 5 2” parameters first, and fall back to a symlink
+    only if it fails. This should help with various tools like pbuilder,
+    sbuild, and schroot (Closes: #817236).
+  * Add autopkgtest support to test various scenarios.
+
+  [ Cyril Brulebois ]
+  * Uniformize COMPONENTS/USE_COMPONENTS handling.
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 10 Mar 2017 13:10:56 +0100
+
+debootstrap (1.0.88) unstable; urgency=high
+
+  [ Sven Joachim ]
+  * Strip the arch-qualifier (Closes: #836525)
+
+ -- Steve McIntyre <93sam@debian.org>  Wed, 08 Feb 2017 23:53:10 +0000
+
+debootstrap (1.0.87) unstable; urgency=high
+
+  [ Julien Cristau ]
+  * Default to split /usr again, as merged-/usr breaks dpkg-shlibdeps
+    (closes: #844221).
+
+  [ Riku Voipio ]
+  * remove scratchbox2 support (closes: #796189)
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 16 Nov 2016 06:47:27 +0100
+
+debootstrap (1.0.86) unstable; urgency=high
+
+  * Rework split_inline_sig by using shell built-ins instead of trying to
+    mix sed and tr together, which might work on regular systems but not
+    from inside the Debian Installer (Closes: #842591). Thanks to Ansgar
+    Burchardt for the proof of concept!
+
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 30 Oct 2016 23:35:45 +0100
+
+debootstrap (1.0.85) unstable; urgency=medium
+
+  [ Julien Cristau ]
+  * Add support for downloading and validating InRelease files, by splitting
+    up detached signature from signed data.
+  * Switch default mirror to deb.debian.org.
+
+  [ Colin Watson ]
+  * Add (Ubuntu) zesty as a symlink to gutsy.
+
+  [ Ansgar Burchardt ]
+  * Add jessie-kfreebsd to merged-/usr blacklist.
+  * No longer Build-Depend on makedev. The code using it was already
+    removed in debootstrap 1.0.82.
+  * Do not use `tar -k` for older releases which might have file
+    conflicts between the packages to be installed. (Closes: #838388)
+  * Error out when seeing short options. (Closes: #548880)
+  * Add oldoldstable -> sid script symlink. (Closes: #792734)
+  * Add buster -> sid and bullseye -> sid script symlinks.
+  * Only unpack and configure the base system when there are actually
+    packages to install. (Closes: #825034)
+  * debootstrap.8: Use stretch instead of wheezy in examples.
+
+  [ Marco d'Itri ]
+  * Enable merged-/usr by default. (Closes: #839046)
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 21 Oct 2016 20:22:49 +0200
+
+debootstrap (1.0.84) unstable; urgency=medium
+
+  [ Ansgar Burchardt ]
+  * Add support for xz-compressed Packages indices. (Closes: #837649)
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 06 Oct 2016 06:59:38 +0200
+
+debootstrap (1.0.83) unstable; urgency=medium
+
+  [ Ansgar Burchardt ]
+  * functions: Validate that the requested suite is listed in the
+    Release file's Suite or Codename field. (Closes: #837075)
+  * Add support for merged-/usr, enabled by a new --merged-usr option.
+    (Closes: #810301)
+  * Feign install of dpkg in second stage. This avoids problems when
+    using dpkg-deb together with busybox' tar. (Closes: #837185)
+  * README: Use https://.
+
+  [ Steve McIntyre ]
+  * Update Standards-Version to 3.9.8 (no changes needed)
+
+ -- Steve McIntyre <93sam@debian.org>  Tue, 13 Sep 2016 13:16:41 +0100
+
+debootstrap (1.0.82) unstable; urgency=medium
+
+  [ Alex Bennée ]
+  * Excise all devices.tar.gz code. Closes: #830869
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 08 Sep 2016 07:09:56 +0200
+
+debootstrap (1.0.81) unstable; urgency=medium
+
+  [ Luca Falavigna ]
+  * Add (Ubuntu) yakkety as a symlink to gutsy.
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 03 May 2016 06:51:57 +0200
+
+debootstrap (1.0.80) unstable; urgency=medium
+
+  [ Jon Boden ]
+  * scripts/gutsy: Support kfreebsd & hurd arches on Ubuntu targets
+    (closes: #818748)
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 22 Mar 2016 19:27:45 +0100
+
+debootstrap (1.0.79) unstable; urgency=medium
+
+  [ Samuel Thibault ]
+  * hurd: move setting up dev and servers firmlink to setup_proc stage. Also
+    firmlink proc there.  Thanks Gabriele Giacone for all the investigation!
+    (Closes: #768102)
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 19 Feb 2016 07:23:59 +0100
+
+debootstrap (1.0.78+nmu1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Split setup_devices in setup_devices (which now only deals with static
+    device nodes) and setup_dynamic_devices, and move the calls to
+    setup_devices from the beginning of the second stage to the end of the
+    first stage.
+    setup_dynamic_devices mounts the appropriate filesystems which provide
+    dynamic device nodes for the architectures which need one in
+    debootstrap (kfreebsd and hurd).
+    This fixes a bug in --second-stage introduced in 1.0.34 and exposed
+    by the devices-related changes of 1.0.76: the second stage debootstrap
+    runs "dpkg --print-architecture >/dev/null" at the very beginning of
+    the program when /dev is still empty, so it creates an empty regular
+    file in place of /dev/null and this will cause mknod to fail later.
+    (Closes: #813232)
+
+ -- Marco d'Itri <md@linux.it>  Wed, 17 Feb 2016 01:23:23 +0100
+
+debootstrap (1.0.78) unstable; urgency=high
+
+  * Use HTTPS for Vcs-* URLs, and link to cgit rather than gitweb.
+  * Don't call mknod with the --mode option, it's not supported in
+    busybox. Use -m instead - fixes the broken fix for #812811.
+    Closes: #813124. Urgency high to get this fix propagated quickly -
+    it's breaking d-i installs right now. Adding myself to uploaders and
+    uploading.
+
+ -- Steve McIntyre <93sam@debian.org>  Fri, 29 Jan 2016 16:36:00 +0000
+
+debootstrap (1.0.77) unstable; urgency=medium
+
+  [ Marco d'Itri ]
+  * Fix permissions on device nodes (Closes: #812811).
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 27 Jan 2016 20:22:05 +0100
+
+debootstrap (1.0.76) unstable; urgency=medium
+
+  [ Marco d'Itri ]
+  * Stop creating useless device nodes (Closes: #571136).
+
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 24 Jan 2016 08:55:18 +0100
+
+debootstrap (1.0.75) unstable; urgency=medium
+
+  * Stop cleaning KEEP_DEBOOTSTRAP_DIR twice, as spotted by Chris Lamb
+    (Closes: #804415).
+  * Add Tanglu support (Closes: #771687), thanks to Matthias Klumpp. At
+    the moment, the following extra suites are recognized:
+     - aequorea
+     - bartholomea
+     - chromodoris
+     - dasyatis
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 11 Nov 2015 18:49:28 +0100
+
+debootstrap (1.0.74) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Add (Ubuntu) xenial as a symlink to gutsy.
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 03 Nov 2015 07:09:23 +0100
+
+debootstrap (1.0.73) unstable; urgency=medium
+
+  * Generate a deburis file with (package, version, uri) tuples, similar
+    to the existing debpaths.
+
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 22 Oct 2015 12:43:35 +0200
+
+debootstrap (1.0.72) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Add (Ubuntu) wily as a symlink to gutsy (closes: #787117).
+
+  [ Colin Watson ]
+  * Fix resolve_deps and setup_available to work in the --foreign case
+    (closes: #757819, LP: #1450980).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 28 Jul 2015 14:32:19 +0100
+
+debootstrap (1.0.71) unstable; urgency=medium
+
+  * Adjust sed call to render it more portable (missing ';'), making it
+    work with FreeBSD sed. Thanks to Nikolai Lifanov for the report and
+    the patch (Closes: #791802).
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 10 Jul 2015 01:29:52 +0200
+
+debootstrap (1.0.70) unstable; urgency=medium
+
+  * Use tr instead of (missing in d-i) xargs (Closes: #785693). Thanks,
+    Julian Schauder!
+
+ -- Cyril Brulebois <kibi@debian.org>  Tue, 19 May 2015 11:38:27 +0200
+
+debootstrap (1.0.69) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Make sure to deduplicate package list in download_release to avoid
+    issues while counting downloaded packages. The failure path could lead
+    to printing some strange integer (Closes: #709751, #768445, #785276,
+    #774752).
+    This was reported to mostly happen whenever --no-resolve-deps is used.
+  * Add support for --force-check-gpg so that one can programmatically
+    make sure keyring checks are used and that no fallback to an https
+    mirror happens (Closes: #661501, #733179, #775454).
+  * Switch default mirror from ftp.us.debian.org to the new, official
+    http redirector service: httpredir.debian.org
+  * Make it possible to override the MAKEDEV variable (Closes: #734743).
+    Thanks, Wookey!
+
+  [ Christian Perrier ]
+  * Update Standards to 3.9.6 (checked)
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 18 May 2015 14:07:43 +0200
+
+debootstrap (1.0.68) unstable; urgency=medium
+
+  [ Steven Chamberlain ]
+  * Support the jessie-kfreebsd suite, by using the same script as
+    jessie (a symlink to sid) (Closes: #784927).
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 11 May 2015 07:46:19 +0200
+
+debootstrap (1.0.67) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Apply patch by Jérémy Bobbio to support reproducible builds: specify
+    a modification time on the tar side, and add the -n option to gzip
+    (Closes: #774069). Thanks, Jérémy!
+  * Update setup_apt_sources to look at USE_COMPONENTS if COMPONENTS is
+    empty, fixing the empty sources.list bug with foreign architectures
+    (Closes: #732255, #773867).
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 14 Jan 2015 07:03:17 +0100
+
+debootstrap (1.0.66) unstable; urgency=low
+
+  [ Cyril Brulebois ]
+  * Specify gzip compression in debian/source/options to allow for better
+    portability on other platforms (Closes: #770214). Thanks, Joey Hess!
+  * Specify gzip compression for debootstrap, and xz for debootstrap-udeb,
+    to mitigate the need for xz on non-Debian platforms (see: #770217).
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 24 Nov 2014 09:15:50 +0100
+
+debootstrap (1.0.65) unstable; urgency=medium
+
+  [ Julien Cristau ]
+  * Add support for stretch.
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 10 Nov 2014 09:24:56 +0100
+
+debootstrap (1.0.64) unstable; urgency=medium
+
+  * Add (Ubuntu) vivid as a symlink to gutsy.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 20 Oct 2014 16:48:49 +0100
+
+debootstrap (1.0.63) unstable; urgency=medium
+
+  [ Joey Hess ]
+  * Move set -e out of shebang line. Closes: #762713
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 25 Sep 2014 06:44:16 +0200
+
+debootstrap (1.0.62) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Fix reporting of package version in retrieval and validation steps
+    to cope with epochs.
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 15 Sep 2014 11:40:54 +0200
+
+debootstrap (1.0.61) unstable; urgency=medium
+
+  * Fix "possibly the package $pkg is at fault" warnings to account for
+    changed error output in dpkg 1.17.2.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 31 Aug 2014 22:07:49 +0100
+
+debootstrap (1.0.60) unstable; urgency=medium
+
+  [ Adam Conrad ]
+  * Add (Ubuntu) utopic as a symlink to gutsy.
+
+  [ Guillem Jover ]
+  * Sync deb support with latest dpkg-deb (closes: #739136):
+    - Add uncompressed data.tar deb member support.
+    - Add uncompressed and xz control.tar deb member support.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 06 May 2014 09:37:34 +0100
+
+debootstrap (1.0.59) unstable; urgency=medium
+
+  * Install ca-certificates as well as apt-transport-https for HTTPS
+    installations.  This makes it possible to copy certificates that were
+    built into the installer to /usr/local/share/ca-certificates/ and thus
+    have them continue to be trusted after installation.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 13 Feb 2014 13:42:54 +0000
+
+debootstrap (1.0.58) unstable; urgency=medium
+
+  * Policy version 3.9.5: no changes required.
+  * Install apt-transport-https if installing from an HTTPS mirror
+    (LP: #1135163).  It may still be necessary to copy certificates into
+    place, but there's at least a reasonable chance that somebody installing
+    from HTTPS may want to keep using it, and we have to install
+    apt-transport-https at this point otherwise they won't be able to do
+    that end-to-end.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 11 Feb 2014 17:46:41 +0000
+
+debootstrap (1.0.57) unstable; urgency=medium
+
+  * pkgdetails_perl: Only interpret percentages following whitespace, to
+    cope with GNU wget outputting the local file name (which may contain "%"
+    due to URL-encoding) after it finishes the download (LP: #1172101).
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 07 Feb 2014 16:12:23 +0000
+
+debootstrap (1.0.56) unstable; urgency=low
+
+  [ Tollef Fog Heen ]
+  * Install base-passwd and base-files in two calls rather than one to
+    avoid problems with home-built media with different ordering in
+    Packages.  Thanks to Jo Shields for pointing this out and providing
+    the workaround.  Closes: #601670.  LP: #1001131.
+
+  [ Joey Hess ]
+  * When deboostrapping Debian, and the debian-archive-keyring is not
+    available, switch the default mirror to a https url. This way at
+    least the CA level of security is available even for users who
+    have no way to check gpg keys in the WoT. The https mirror is
+    currently https://mirrors.kernel.org/debian.
+  * Avoid writing https urls into sources.list, as apt does not support https.
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 30 Dec 2013 08:00:41 +0100
+
+debootstrap (1.0.55) unstable; urgency=low
+
+  [ Matthias Klose ]
+  * Add (Ubuntu) trusty as a symlink to gutsy.
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 22 Oct 2013 13:43:23 +0200
+
+debootstrap (1.0.53) unstable; urgency=low
+
+  [ Dmitrijs Ledkovs ]
+  * Set debian source format to '3.0 (native)'.
+  * Bump debhelper compat level to 9.
+  * Set Vcs-* to canonical format.
+
+  [ Christian Perrier ]
+  * Update Standards to 3.9.4 (checked)
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 14 Jul 2013 13:06:33 +0200
+
+debootstrap (1.0.52) unstable; urgency=low
+
+  * scripts/gutsy: Make the fake initctl pass through "initctl version"
+    calls, used by such things as invoke-rc.d to figure out whether it's
+    running under Upstart (LP: #1182540).
+  * scripts/sid, scripts/gutsy: Add a policy-rc.d, matching that in
+    debian-installer-utils.  This is the primary way to disable daemon
+    startup.
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 22 May 2013 16:55:59 +0100
+
+debootstrap (1.0.51) unstable; urgency=low
+
+  [ Scott Kitterman ]
+  * Add (Ubuntu) saucy as a symlink to gutsy (closes: #706989).
+
+  [ Colin Watson ]
+  * Clarify location of pkgdetails.c in error message (closes: #708771).
+  * Resolve mount point symlinks relative to the target chroot before
+    unmounting them (closes: #702861, #703037, #704744).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 18 May 2013 23:18:08 +0100
+
+debootstrap (1.0.50) unstable; urgency=low
+
+  [ Hector Oron ]
+  * Report package version information on package retrieve and validation.
+    Closes: #697675
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 17 May 2013 13:34:34 +0200
+
+debootstrap (1.0.49) unstable; urgency=medium
+
+  * Add support for jessie. Closes: #706788
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 04 May 2013 23:37:52 -0400
+
+debootstrap (1.0.48) unstable; urgency=low
+
+  * Team upload
+
+  [ Julien Cristau ]
+  * Disable InRelease support.  gpgv won't give us back the signed data, and
+    full gpg is not available inside d-i (closes: #703889).
+  * Move extract_release_components to after signature verification.
+    Suggested by Ansgar Burchardt.
+
+ -- Didier Raboud <odyx@debian.org>  Thu, 04 Apr 2013 16:17:57 +0200
+
+debootstrap (1.0.47) unstable; urgency=low
+
+  * Team upload
+  * Properly decrypt the InRelease file when downloading from an archive
+    where InRelease is used. This longstanding bug was masked by former
+    APT behaviour and was revealed only with recent APT versions
+    Closes: #703146
+    Thanks to Michael Vogt for the analysis and patch
+  * Add a dependency on gpg because of the above change.
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 20 Mar 2013 21:34:29 +0100
+
+debootstrap (1.0.46) unstable; urgency=low
+
+  * Team upload.
+  * Use `which` to find out sh only if /bin/sh does not exist.
+
+ -- Samuel Thibault <sthibault@debian.org>  Thu, 27 Dec 2012 15:47:16 +0100
+
+debootstrap (1.0.45) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Better support use on Android by not hardcoding /bin/sh
+    in a test file that's created, and instead putting in the
+    actual path to sh. Closes: #694310 Thanks, Shawn Landden
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 22 Dec 2012 12:56:32 +0100
+
+debootstrap (1.0.44) unstable; urgency=low
+
+  * Remove double quotes to fix for loop on GNU/kFreeBSD, thanks to
+    Oleg Ginzburg (Closes: #693718).
+
+ -- Cyril Brulebois <kibi@debian.org>  Tue, 20 Nov 2012 23:55:53 +0100
+
+debootstrap (1.0.43) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Fix "arc" typo. Closes: #686680
+
+  [ Colin Watson ]
+  * Add (Ubuntu) raring as a symlink to gutsy.
+
+  [ Christian Perrier ]
+  * Add myself to Uploaders and drop Anthony Towns who is no
+    longer active in debootstrap maintenance for a few years. Thanks
+    for your work, Anthony.
+  * Bump Standards to 3.9.3 (checked)
+  * Replace XC-Package-Type by Package-Type in debian/control
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 27 Oct 2012 12:46:46 +0200
+
+debootstrap (1.0.42) unstable; urgency=low
+
+  * Downgrade the absence of an InRelease file from a warning to an info
+    message.  For now, debootstrap can cope fine without, and it's possible
+    there are Debian mirrors that don't have InRelease; Ubuntu doesn't quite
+    have InRelease support yet either (LP: #1017398).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 03 Jul 2012 15:34:57 +0100
+
+debootstrap (1.0.41) unstable; urgency=low
+
+  [ Mehdi Dogguy ]
+  * Add support for InRelease files (Closes: #638682)
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 21 Jun 2012 13:16:22 -0400
+
+debootstrap (1.0.40) unstable; urgency=low
+
+  [ Joey Hess ]
+  * When installation or configuration of a package fails, output a message
+    that points the user to the log file. Attempt to grep out the first
+    package that dpkg failed on and show its name too. Closes: #472704
+
+  [ Colin Watson ]
+  * Add (Ubuntu) quantal as a symlink to gutsy.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 26 Apr 2012 17:44:44 +0100
+
 debootstrap (1.0.39ubuntu0.3pexip1) precise; urgency=low
 
   * Package for Pexip
@@ -5,24 +1321,6 @@ debootstrap (1.0.39ubuntu0.3pexip1) precise; urgency=low
     http://anonscm.debian.org/gitweb/?p=d-i/debootstrap.git;a=commit;h=a1d5ddea5b7db00548173cee8236aaad61cf5961
 
  -- John-Mark Bell <jmb@pexip.com>  Mon, 09 Sep 2013 17:36:18 +0100
-
-debootstrap (1.0.39ubuntu0.3) precise; urgency=low
-
-  * Add (Ubuntu) saucy as a symlink to gutsy. (LP: #1172920)
-
- -- Scott Kitterman <scott@kitterman.com>  Thu, 25 Apr 2013 18:11:52 -0400
-
-debootstrap (1.0.39ubuntu0.2) precise-proposed; urgency=low
-
-  * Add (Ubuntu) raring as a symlink to gutsy. (LP: #1068707)
-
- -- Adam Stokes <adam.stokes@canonical.com>  Mon, 05 Nov 2012 18:06:40 +0100
-
-debootstrap (1.0.39ubuntu0.1) precise-proposed; urgency=low
-
-  * Add (Ubuntu) quantal as a symlink to gutsy. (LP: #992669)
-
- -- Benjamin Drung <bdrung@debian.org>  Tue, 01 May 2012 17:41:04 +0200
 
 debootstrap (1.0.39) unstable; urgency=low
 
@@ -37,7 +1335,7 @@ debootstrap (1.0.39) unstable; urgency=low
 debootstrap (1.0.38) unstable; urgency=low
 
   [ Joey Hess ]
-  * Improve error message when a decompressor is not available, 
+  * Improve error message when a decompressor is not available,
     to indicate which package has been built with bzip today.
     Closes: #644719
 
@@ -171,7 +1469,7 @@ debootstrap (1.0.28) unstable; urgency=low
   [ Joey Hess ]
   * Remove 5 second sleeps when debootstrap finds additional required
     dependencies. d-i just got that much faster.
-  * Use SHA checksums. Defaulting to SHA256, and configurable by 
+  * Use SHA checksums. Defaulting to SHA256, and configurable by
     SHA_SIZE environment variable. Closes: #614315
   * If a sha256sum program is not available, fall back to sha1sum.
     This is to support debootstrap use on embedded systems, which are more
@@ -185,7 +1483,7 @@ debootstrap (1.0.27) unstable; urgency=low
 
   [ Miguel Figueiredo ]
   * Fix bug and typo on --private-key
-    Patch by Jonathan Klee. 
+    Patch by Jonathan Klee.
 
   [ Jeremie Koenig ]
   * Hurd support:
@@ -221,7 +1519,7 @@ debootstrap (1.0.25) unstable; urgency=low
 debootstrap (1.0.24) unstable; urgency=low
 
   [ Miguel Figueiredo ]
-  * Apply patches from by Jonathan Klee and Guillaume Chauvel 
+  * Apply patches from by Jonathan Klee and Guillaume Chauvel
     to add support to https (closes: #521196).
 
   [ Colin Watson ]
@@ -307,7 +1605,7 @@ debootstrap (1.0.19) unstable; urgency=low
 
 debootstrap (1.0.18) unstable; urgency=low
 
-  * Only use dpkg from the chroot, as there is no guarantee dpkg is 
+  * Only use dpkg from the chroot, as there is no guarantee dpkg is
     available outside of the chroot (d-i installation for example).
 
  -- Aurelien Jarno <aurel32@debian.org>  Wed, 23 Sep 2009 11:37:01 +0200
@@ -893,7 +2191,7 @@ debootstrap (0.2.43) unstable; urgency=high
 debootstrap (0.2.42) unstable; urgency=high
 
   * Acknowledge NMUs. (Closes: #262137, #262165, #262178, #262375)
-  * [sarge] Switch to libgnutls11 so exim4 can switch. (Closes: #268325) 
+  * [sarge] Switch to libgnutls11 so exim4 can switch. (Closes: #268325)
   * [sid] Removed "gcc-3.0-base" and "libstdc++3" for HPPA as they have been
     removed from sid. (Closes: #268049)
   * [Makefile] Make the regular video devices on all archs. (Closes: #265081)
@@ -932,7 +2230,7 @@ debootstrap (0.2.41) unstable; urgency=high
     systems (e.g. #212646) and there is a consensus it is no longer needed in
     a base environment.
   * [sarge, sid] Removed aboot, aboot-base, elilo, efibootmgr, silo, dvhtool,
-    delo, palo, vmelilo. As per the consensus reached in the thread starting 
+    delo, palo, vmelilo. As per the consensus reached in the thread starting
     with http://lists.debian.org/debian-boot/2004/04/msg00634.html, the
     installation of boot loaders is now debian-installer's responsibility.
     (Closes: #247906)
@@ -975,7 +2273,7 @@ debootstrap (0.2.39) unstable; urgency=medium
   * [woody.buildd] Install libperl5.6. Thanks Rene Engelhard. (Closes: #251702)
   * [sarge.buildd] Install libc6.1 rather than libc6 on alpha. Thanks Rene
     Engelhard. (Closes: #251703)
-  
+
   Goswin von Brederlow <brederlo@informatik.uni-tuebingen.de>
   * Copy script for sarge to sid
   * Add handling for amd64 to sarge/sid scripts
@@ -1079,7 +2377,7 @@ debootstrap (0.2.29) unstable; urgency=low
 debootstrap (0.2.28) unstable; urgency=medium
 
   * [sid] Exim has changed GnuTLS dependencies. Added libgnutls10, libgcrypt7,
-    libgpg-error0, libopencdk8, libtasn1-2; dropped libgnutls7, libgcrypt1, 
+    libgpg-error0, libopencdk8, libtasn1-2; dropped libgnutls7, libgcrypt1,
     libtasn1-0.
   * [sarge,sid] Dropped lilo, mbr, modconf, libdevmapper1.00 as
     debian-installer handles the bootloader installation and modules
