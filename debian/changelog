@@ -1,3 +1,9 @@
+debootstrap (1.0.137pexip1) pexip; urgency=medium
+
+  * Backport from trixie
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 13 Aug 2024 17:45:40 +0100
+
 debootstrap (1.0.137) unstable; urgency=medium
 
   [ kasperk81 ]
